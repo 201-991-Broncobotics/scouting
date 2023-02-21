@@ -1,9 +1,9 @@
 {
   "build": {
-    "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build",
+    "beforeDevCommand": "cd ../desktop-frontend && pnpm dev",
+    "beforeBuildCommand": "cd ../desktop-frontend && pnpm build",
     "devPath": "http://localhost:1420",
-    "distDir": "../dist",
+    "distDir": "../desktop-frontend/dist",
     "withGlobalTauri": false
   },
   "package": {
@@ -16,6 +16,9 @@
       "shell": {
         "all": false,
         "open": true
+      }, 
+      "fs": {
+        "all": true
       }
     },
     "bundle": {

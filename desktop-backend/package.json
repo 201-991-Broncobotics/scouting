@@ -1,0 +1,6 @@
+{
+  "name": "scouting-desktop-backend",
+  "scripts": {
+    "lint": "cargo check"
+  }
+}

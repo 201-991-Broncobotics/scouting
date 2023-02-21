@@ -1,4 +1,5 @@
 packages: 
   - web-app
-  - desktop
+  - desktop-frontend
+  - desktop-backend
   - ui

@@ -1,5 +1,8 @@
 {
   "name": "scouting",
   "scripts": {},
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.2.2"
+  }
 }
