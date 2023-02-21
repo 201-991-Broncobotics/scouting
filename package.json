@@ -1,8 +1,11 @@
 {
   "name": "scouting",
-  "scripts": {},
+  "scripts": {
+    "lint": "turbo lint check"
+  },
   "license": "MIT",
   "devDependencies": {
-    "@tauri-apps/cli": "^1.2.2"
+    "@tauri-apps/cli": "^1.2.2",
+    "turbo": "^1.8.1"
   }
 }
