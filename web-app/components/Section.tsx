@@ -1,7 +1,4 @@
-import React from 'react'
-import { InputProps } from './inputs/BaseInputProps'
-import ConfigurableInput from './inputs/ConfigurableInput'
-import InputCard from './inputs/InputCard'
+import { InputCard, ConfigurableInput, InputProps } from 'ui'
 
 interface SectionProps {
   name: string

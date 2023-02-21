@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BaseInputProps from './BaseInputProps'
+import {BaseInputProps} from './BaseInputProps'
 
 export interface NumberInputProps extends BaseInputProps {
   min?: number
@@ -7,7 +7,7 @@ export interface NumberInputProps extends BaseInputProps {
   defaultValue?: number
 }
 
-export default function NumberInput(data: NumberInputProps) {
+export  function NumberInput(data: NumberInputProps) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     data.onChange(e.target.value)
     e.preventDefault()

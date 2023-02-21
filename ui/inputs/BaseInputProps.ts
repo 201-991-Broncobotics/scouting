@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default interface BaseInputProps extends InputProps {
+export interface BaseInputProps extends InputProps {
   onChange: (value: any) => void
 }
 export interface Config {

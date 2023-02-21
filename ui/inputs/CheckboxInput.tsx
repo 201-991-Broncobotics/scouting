@@ -1,11 +1,11 @@
 import React from 'react'
-import BaseInputProps from './BaseInputProps'
+import {BaseInputProps} from './BaseInputProps'
 
 export interface BoolInputProps extends BaseInputProps {
   defaultValue?: boolean
 }
 
-export default function Checkbox(data: BoolInputProps) {
+export  function Checkbox(data: BoolInputProps) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     data.onChange(e.target.checked)
   }

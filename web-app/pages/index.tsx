@@ -1,14 +1,9 @@
 import Head from 'next/head'
 import { ChangeEvent, useEffect, useState } from 'react'
 import configJson from '../config/2022/config.json'
-import {
-  Config,
-  InputProps,
-  SectionProps,
-} from '../components/inputs/BaseInputProps'
+import { Config, InputProps, Button, Variant } from 'ui'
 import QRModal from '../components/QRModal'
 import Section from '../components/Section'
-import Button, { Variant } from '../components/core/Button'
 
 function buildConfig(c: Config) {
   let config: Config = { ...c }

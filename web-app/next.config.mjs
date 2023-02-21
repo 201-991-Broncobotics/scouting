@@ -5,7 +5,7 @@ const config = withPWA({
   dest: 'public',
 })({
   reactStrictMode: true,
-  swcMinify: true,
+  transpilePackages: ['ui'],
 })
 
 export default config

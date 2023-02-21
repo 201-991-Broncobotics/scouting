@@ -6,7 +6,7 @@ export interface InputCardProps {
   hasValue: boolean
 }
 
-export default function InputCard(
+export  function InputCard(
   props: React.PropsWithChildren<InputCardProps>
 ) {
   return (
