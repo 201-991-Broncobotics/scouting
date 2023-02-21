@@ -1,38 +1,42 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@tailwindcss/forms': ^0.4.0
-  '@types/node': ^18.0.4
-  '@types/react': ^18.0.28
-  autoprefixer: ^10.4.0
-  next: ^12.3.4
-  next-pwa: ^5.4.6
-  postcss: ^8.4.5
-  prettier: ^2.5.1
-  prettier-plugin-tailwindcss: ^0.1.1
-  qrcode.react: ^3.0.1
-  react: ^18.0.2
-  react-dom: ^18.0.2
-  tailwindcss: ^3.0.7
-  typescript: ^4.9
+importers:
 
-dependencies:
-  '@tailwindcss/forms': 0.4.1_tailwindcss@3.2.7
-  next: 12.3.4_6m24vuloj5ihw4zc5lbsktc4fu
-  next-pwa: 5.6.0_55uj7t37lr42kn3oixoztpkwhu
-  qrcode.react: 3.1.0_react@18.2.0
-  react: 18.2.0
-  react-dom: 18.2.0_react@18.2.0
+  .:
+    specifiers: {}
 
-devDependencies:
-  '@types/node': 18.14.0
-  '@types/react': 18.0.28
-  autoprefixer: 10.4.13_postcss@8.4.21
-  postcss: 8.4.21
-  prettier: 2.8.4
-  prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.4
-  tailwindcss: 3.2.7_postcss@8.4.21
-  typescript: 4.9.5
+  web-app:
+    specifiers:
+      '@tailwindcss/forms': ^0.4.0
+      '@types/node': ^18.0.4
+      '@types/react': ^18.0.28
+      autoprefixer: ^10.4.0
+      next: ^12.3.4
+      next-pwa: ^5.4.6
+      postcss: ^8.4.5
+      prettier: ^2.5.1
+      prettier-plugin-tailwindcss: ^0.1.1
+      qrcode.react: ^3.0.1
+      react: ^18.0.2
+      react-dom: ^18.0.2
+      tailwindcss: ^3.0.7
+      typescript: ^4.9
+    dependencies:
+      '@tailwindcss/forms': 0.4.1_tailwindcss@3.2.7
+      next: 12.3.4_6m24vuloj5ihw4zc5lbsktc4fu
+      next-pwa: 5.6.0_55uj7t37lr42kn3oixoztpkwhu
+      qrcode.react: 3.1.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@types/node': 18.14.0
+      '@types/react': 18.0.28
+      autoprefixer: 10.4.13_postcss@8.4.21
+      postcss: 8.4.21
+      prettier: 2.8.4
+      prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.4
+      tailwindcss: 3.2.7_postcss@8.4.21
+      typescript: 4.9.5
 
 packages:
 
