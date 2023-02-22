@@ -85,7 +85,7 @@ export default function Home() {
   }
 
   function download(filename: string, text: string) {
-    var element = document.createElement('a')
+    const element = document.createElement('a')
     element.setAttribute(
       'href',
       'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
@@ -172,7 +172,7 @@ export default function Home() {
             </div>
             <div className="mb-4 flex flex-col justify-center rounded bg-white shadow-md">
               <Button
-                variant={Variant.Secondary}
+                variant="secondary"
                 className="m-2"
                 onClick={() =>
                   navigator.clipboard.writeText(
@@ -187,7 +187,7 @@ export default function Home() {
                 Copy Column Names
               </Button>
               <Button
-                variant={Variant.Secondary}
+                variant="secondary"
                 className="m-2"
                 onClick={() => downloadConfig()}
               >

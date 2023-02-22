@@ -1,19 +1,16 @@
 import React from "react";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "className" | "children" | "disabled"> {
   variant: Variant;
 }
 
-export enum Variant {
-  Primary = "primary",
-  Secondary = "secondary",
-  Danger = "danger",
-}
+export type Variant = "primary" | "secondary" | "danger";
 
 const VARIANT_MAPS: Record<Variant, string> = {
-  [Variant.Primary]: "bg-gray-700 hover:bg-gray-800 disabled:bg-gray-300",
-  [Variant.Secondary]: "bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300",
-  [Variant.Danger]: "bg-red-500 hover:bg-red-700 disabled:bg-red-300",
+  primary: "bg-gray-700 hover:bg-gray-800 disabled:bg-gray-300",
+  secondary: "bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300",
+  danger: "bg-red-500 hover:bg-red-700 disabled:bg-red-300",
 };
 
 export function Button(props: ButtonProps) {
