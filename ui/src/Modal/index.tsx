@@ -28,7 +28,7 @@ const InnerModal: React.FC<InnerModalProps> = ({ isOpen, onClose, title, childre
             </Dialog.Title>
             <div className='mt-2'>{children}</div>
             <div className='mt-4 -ml-2 flex flex-row justify-center '>
-              <Button variant='danger' onClick={onClose} ref={cancelButtonRef}>
+              <Button variant='danger' onClick={onClose} buttonRef={cancelButtonRef}>
                 Close
               </Button>
             </div>

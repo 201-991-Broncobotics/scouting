@@ -1,8 +1,21 @@
 import Head from 'next/head'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import configJson from '../config/2022/config.json'
 import { Config, InputProps, Button, QrModal } from 'ui'
 import Section from '../components/Section'
+import LZMA from 'lzma-web'
+
+async function compress(
+  data: string | Record<string, unknown>
+): Promise<string> {
+  const lzma = new LZMA()
+  if (typeof data === 'object') data = JSON.stringify(data)
+
+  const compressed = await lzma.compress(data, 9)
+
+  console.log(compressed)
+  return compressed.toString()
+}
 
 function buildConfig(c: Config) {
   let config: Config = { ...c }
@@ -19,6 +32,22 @@ function getDefaultConfig(): Config {
 
 export default function Home() {
   const [formData, setFormData] = useState<Config>(getDefaultConfig)
+  const [qrData, setQrData] = useState('')
+  useEffect(() => {
+    ;(async () => {
+      let minified = Object.fromEntries(
+        formData.sections
+          .map((section) =>
+            section.fields.map(({ value, code }) => [code, value] as const)
+          )
+          .flat()
+      )
+      let compressed = await compress(JSON.stringify(minified))
+
+      setQrData(compressed)
+      console.log(compressed)
+    })()
+  }, [formData])
 
   useEffect(() => {
     let userConfig = localStorage.getItem('QRScoutUserConfig')
@@ -28,6 +57,7 @@ export default function Home() {
       setFormData(getDefaultConfig())
     }
   }, [])
+
 
   function updateValue(sectionName: string, code: string, data: any) {
     const currentData = { ...formData }
@@ -39,17 +69,6 @@ export default function Home() {
       }
     }
     setFormData(currentData)
-  }
-
-  function getMissingRequiredFields(): InputProps[] {
-    return formData.sections
-      .map((s) => s.fields)
-      .flat()
-      .filter(
-        (f) =>
-          f.required &&
-          (f.value === null || f.value === undefined || f.value === ``)
-      )
   }
 
   function getFieldValue(code: string): any {
@@ -72,52 +91,6 @@ export default function Home() {
       })
 
     setFormData(currentData)
-  }
-
-  function getQRCodeData(): string {
-    return formData.sections
-      .map((s) => s.fields)
-      .flat()
-      .map((v) => `${v.value}`)
-      .join('\t')
-  }
-
-  function download(filename: string, text: string) {
-    const element = document.createElement('a')
-    element.setAttribute(
-      'href',
-      'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
-    )
-    element.setAttribute('download', filename)
-
-    element.style.display = 'none'
-    document.body.appendChild(element)
-
-    element.click()
-
-    document.body.removeChild(element)
-  }
-
-  function downloadConfig() {
-    const configDownload = { ...formData }
-
-    configDownload.sections.forEach((s) =>
-      s.fields.forEach((f) => (f.value = undefined))
-    )
-    download('QRScout_config.json', JSON.stringify(configDownload))
-  }
-
-  function handleFileChange(evt: ChangeEvent<HTMLInputElement>) {
-    var reader = new FileReader()
-    reader.onload = function (e) {
-      const configText = e.target?.result as string
-      localStorage.setItem('QRScoutUserConfig', configText)
-      const jsonData = JSON.parse(configText)
-      setFormData(buildConfig(jsonData as Config))
-    }
-    if (evt.target.files && evt.target.files.length > 0) {
-      reader.readAsText(evt.target.files[0])
-    }
   }
 
   return (
@@ -143,53 +116,21 @@ export default function Home() {
                 />
               )
             })}
-
-            <div className="mb-4 flex flex-col justify-center rounded bg-white shadow-md">
-              <Button variant="danger" onClick={() => resetSections()}>
-                Reset
-              </Button>
-            </div>
-            <div className="mb-4 flex flex-col justify-center rounded bg-white shadow-md">
-              <Button
-                variant="secondary"
-                className="m-2"
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    formData.sections
-                      .map((s) => s.fields)
-                      .flat()
-                      .map((f) => f.title)
-                      .join('\t')
-                  )
-                }
-              >
-                Copy Column Names
-              </Button>
-              <Button
-                variant="secondary"
-                className="m-2"
-                onClick={() => downloadConfig()}
-              >
-                Download Config
-              </Button>
-              <label className="m-2 flex cursor-pointer flex-row justify-center rounded border bg-gray-500 py-2 text-center font-bold text-white hover:bg-gray-600">
-                <span className="text-base leading-normal">Upload Config</span>
-                <input
-                  type="file"
-                  className="hidden"
-                  accept=".json"
-                  onChange={(e) => handleFileChange(e)}
-                />
-              </label>
-            </div>
           </div>
         </form>
-        <QrModal
-          title={`${getFieldValue('robot')} - ${getFieldValue('matchNumber')}`}
-          buttonText="Open QrCode"
-        >
-          {getQRCodeData()}
-        </QrModal>
+        <div className="flex flex-row justify-evenly">
+          <QrModal
+            title={`${getFieldValue('robot')} - ${getFieldValue(
+              'matchNumber'
+            )}`}
+            buttonText="Open QrCode"
+          >
+            {qrData}
+          </QrModal>
+          <Button variant="danger" onClick={() => resetSections()}>
+            Reset
+          </Button>
+        </div>
       </main>
     </div>
   )

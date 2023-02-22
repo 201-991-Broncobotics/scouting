@@ -2,7 +2,7 @@ import React, { type LegacyRef } from "react";
 
 export interface ButtonProps
   extends Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "className" | "children" | "disabled"> {
-  ref?: LegacyRef<HTMLButtonElement> | undefined;
+  buttonRef?: LegacyRef<HTMLButtonElement> | undefined;
   variant: Variant;
 }
 
@@ -20,11 +20,11 @@ export function Button(props: ButtonProps) {
       type='button'
       onClick={props.onClick}
       className={[
-        "focus:shadow-outline mx-2 rounded py-2 px-4 font-bold text-white focus:outline-none",
+        "focus:shadow-outline mx-2 rounded py-2 px-4 font-bold text-white focus:outline-none h-min ",
         variants[props.variant],
         props.className,
       ].join(" ")}
-      ref={props.ref}
+      ref={props.buttonRef}
       disabled={props.disabled}>
       {props.children}
     </button>

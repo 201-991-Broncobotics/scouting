@@ -10,6 +10,12 @@ importers:
       '@tauri-apps/cli': 1.2.3
       turbo: 1.8.1
 
+  algos:
+    specifiers:
+      lzma-web: ^3.0.1
+    dependencies:
+      lzma-web: 3.0.1
+
   desktop-backend:
     specifiers: {}
 
@@ -88,9 +94,11 @@ importers:
       '@tailwindcss/forms': ^0.4.0
       '@types/node': ^18.0.4
       '@types/react': ^18.0.28
+      algos: workspace:*
       autoprefixer: ^10.4.0
       eslint: 8.34.0
       eslint-config-next: 13.1.6
+      lzma-web: ^3.0.1
       next: ^13.0.2
       next-pwa: ^5.4.6
       postcss: ^8.4.5
@@ -104,6 +112,8 @@ importers:
       ui: workspace:*
     dependencies:
       '@tailwindcss/forms': 0.4.1_tailwindcss@3.2.7
+      algos: link:../algos
+      lzma-web: 3.0.1
       next: 13.1.6_6m24vuloj5ihw4zc5lbsktc4fu
       next-pwa: 5.6.0_mcqucnrpvo7k7inbdiiqkaosxi
       qrcode.react: 3.1.0_react@18.2.0
@@ -6809,6 +6819,10 @@ packages:
     resolution: {integrity: sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ==}
     hasBin: true
     dev: true
+
+  /lzma-web/3.0.1:
+    resolution: {integrity: sha512-sb5cdfd+PLNljK/HUgYzvnz4G7r0GFK8sonyGrqJS0FVyUQjFYcnmU2LqTWFi6r48lH1ZBstnxyLWepKM/t7QA==}
+    dev: false
 
   /magic-string/0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
