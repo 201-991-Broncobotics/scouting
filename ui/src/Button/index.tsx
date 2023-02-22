@@ -1,17 +1,18 @@
-import React from "react";
+import React, { type LegacyRef } from "react";
 
 export interface ButtonProps
   extends Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "className" | "children" | "disabled"> {
+  ref?: LegacyRef<HTMLButtonElement> | undefined;
   variant: Variant;
 }
 
 export type Variant = "primary" | "secondary" | "danger";
 
-const VARIANT_MAPS: Record<Variant, string> = {
+const variants = {
   primary: "bg-gray-700 hover:bg-gray-800 disabled:bg-gray-300",
   secondary: "bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300",
   danger: "bg-red-500 hover:bg-red-700 disabled:bg-red-300",
-};
+} satisfies Record<Variant, string>;
 
 export function Button(props: ButtonProps) {
   return (
@@ -19,10 +20,11 @@ export function Button(props: ButtonProps) {
       type='button'
       onClick={props.onClick}
       className={[
-        "focus:shadow-outline mx-2 rounded  py-2 px-4 font-bold text-white focus:outline-none",
-        VARIANT_MAPS[props.variant],
+        "focus:shadow-outline mx-2 rounded py-2 px-4 font-bold text-white focus:outline-none",
+        variants[props.variant],
         props.className,
       ].join(" ")}
+      ref={props.ref}
       disabled={props.disabled}>
       {props.children}
     </button>

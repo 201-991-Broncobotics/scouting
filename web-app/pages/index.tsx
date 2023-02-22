@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { ChangeEvent, useEffect, useState } from 'react'
 import configJson from '../config/2022/config.json'
-import { Config, InputProps, Button, Variant } from 'ui'
-import QRModal from '../components/QRModal'
+import { Config, InputProps, Button, QrModal } from 'ui'
 import Section from '../components/Section'
 
 function buildConfig(c: Config) {
@@ -20,7 +19,6 @@ function getDefaultConfig(): Config {
 
 export default function Home() {
   const [formData, setFormData] = useState<Config>(getDefaultConfig)
-  const [showQR, setShowQR] = useState(false)
 
   useEffect(() => {
     let userConfig = localStorage.getItem('QRScoutUserConfig')
@@ -133,13 +131,6 @@ export default function Home() {
         <h1 className="font-sans text-6xl font-bold">
           <div className="text-red-600">{formData.page_title}</div>
         </h1>
-        <QRModal
-          show={showQR}
-          title={`${getFieldValue('robot')} - ${getFieldValue('matchNumber')}`}
-          data={getQRCodeData()}
-          onDismiss={() => setShowQR(false)}
-        />
-
         <form>
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {formData.sections.map((section) => {
@@ -154,21 +145,9 @@ export default function Home() {
             })}
 
             <div className="mb-4 flex flex-col justify-center rounded bg-white shadow-md">
-              <button
-                className="focus:shadow-outline mx-2 rounded bg-gray-700 py-6 px-6 font-bold uppercase text-white hover:bg-gray-700 focus:shadow-lg focus:outline-none disabled:bg-gray-300"
-                type="button"
-                onClick={() => setShowQR(true)}
-                disabled={getMissingRequiredFields().length > 0}
-              >
-                Commit
-              </button>
-              <button
-                className="focus:shadow-outline mx-2 my-6 rounded border border-red-400 bg-white py-2 font-bold text-red-400 hover:bg-red-200 focus:outline-none"
-                type="button"
-                onClick={() => resetSections()}
-              >
+              <Button variant="danger" onClick={() => resetSections()}>
                 Reset
-              </button>
+              </Button>
             </div>
             <div className="mb-4 flex flex-col justify-center rounded bg-white shadow-md">
               <Button
@@ -205,6 +184,12 @@ export default function Home() {
             </div>
           </div>
         </form>
+        <QrModal
+          title={`${getFieldValue('robot')} - ${getFieldValue('matchNumber')}`}
+          buttonText="Open QrCode"
+        >
+          {getQRCodeData()}
+        </QrModal>
       </main>
     </div>
   )

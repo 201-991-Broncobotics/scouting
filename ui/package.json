@@ -7,8 +7,11 @@
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "files": ["tailwind.css"],
   "dependencies": {
+    "@headlessui/react": "^1.7.11",
     "@types/react": "^18.0.17",
+    "qrcode.react": "^3.0.1",
     "react": "^18.2.0",
     "typescript": "^4.9.0"
   },

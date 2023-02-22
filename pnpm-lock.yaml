@@ -44,6 +44,7 @@ importers:
 
   ui:
     specifiers:
+      '@headlessui/react': ^1.7.11
       '@storybook/addon-essentials': ^7.0.0-beta.53
       '@storybook/addon-interactions': ^7.0.0-beta.53
       '@storybook/addon-links': ^7.0.0-beta.53
@@ -55,13 +56,16 @@ importers:
       autoprefixer: ^10.4.13
       postcss: ^8.4.21
       prop-types: ^15.8.1
+      qrcode.react: ^3.0.1
       react: ^18.2.0
       react-dom: ^18.2.0
       storybook: ^7.0.0-beta.53
       tailwindcss: ^3.2.7
       typescript: ^4.9.0
     dependencies:
+      '@headlessui/react': 1.7.11_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.28
+      qrcode.react: 3.1.0_react@18.2.0
       react: 18.2.0
       typescript: 4.9.5
     devDependencies:
@@ -1565,6 +1569,18 @@ packages:
   /@fal-works/esbuild-plugin-global-externals/2.1.2:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
+
+  /@headlessui/react/1.7.11_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-EaDbVgcyiylhtskZZf4Qb/JiiByY7cYbd0qgZ9xm2pm2X7hKojG0P4TaQYKgPOV3vojPhd/pZyQh3nmRkkcSyw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
