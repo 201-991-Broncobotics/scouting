@@ -19,6 +19,9 @@
       }, 
       "fs": {
         "all": true
+      },
+       "dialog": {
+        "all": true
       }
     },
     "bundle": {
@@ -36,7 +39,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.broncobotics.scouting",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

@@ -6,7 +6,7 @@ declare global {
     }
 }
 
-const invoke = window.__TAURI_INVOKE__;
+const invoke = window?.__TAURI_INVOKE__;
 
 export function newComp(comp: Competition) {
     return invoke<null>("new_comp", { comp })

@@ -5,28 +5,27 @@ import {
   type UseFormRegister,
   UseFieldArrayUpdate,
   UseFormGetValues,
+  UseFormHandleSubmit,
 } from "react-hook-form";
 import { Button } from "ui";
-import {
-  FieldSchema,
-} from "../lib/types";
+import { FieldSchema } from "../lib/types";
 
 interface Form {
   fields: FieldSchema[];
 }
 
-export const Form = () => {
-  const { control, register, getValues } = useForm<Form>();
+export const Form = ({ onSubmit }: { onSubmit: (form: Form) => void | Promise<void> }) => {
+  const { control, register, getValues, handleSubmit } = useForm<Form>({});
   const { fields, append, update } = useFieldArray({
     control,
     name: "fields",
   });
 
   return (
-    <>
-      <div className="flex flex-row justify-between m-5">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='flex flex-row justify-between m-5'>
         <Button
-          variant="primary"
+          variant='primary'
           onClick={() => {
             append({
               label: "",
@@ -37,7 +36,7 @@ export const Form = () => {
           add number
         </Button>
         <Button
-          variant="primary"
+          variant='primary'
           onClick={() => {
             append({
               label: "",
@@ -48,7 +47,7 @@ export const Form = () => {
           add checkbox
         </Button>
         <Button
-          variant="primary"
+          variant='primary'
           onClick={() => {
             append({
               label: "",
@@ -59,7 +58,7 @@ export const Form = () => {
           add text
         </Button>
         <Button
-          variant="primary"
+          variant='primary'
           onClick={() => {
             append({
               type: "choice",
@@ -71,19 +70,31 @@ export const Form = () => {
           add choice
         </Button>
       </div>
-      {fields.map(({ id }, index) => <Field key={id} {...{ register, update, get: getValues, index }} />)}
-    </>
+      {fields.map(({ id }, index) => (
+        <Field key={id} {...{ register, update, get: getValues, index }} />
+      ))}
+      <Button type='submit' variant='secondary'>
+        Submit
+      </Button>
+    </form>
   );
 };
 
-function Input(props: Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "className">) {
-  return <input {...props} className="border border-1 border-black text-black " />
+export function Input(
+  props: Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "className">
+) {
+  return <input {...props} className='border border-1 border-black text-black ' />;
+}
+export function Label({ children }: { children: string }) {
+  return <span className='text-black text-lg'>{children}</span>;
 }
 
 export function NormalField({ register, index }: { register: UseFormRegister<Form>; index: number }) {
   return (
-    <div className="flex flex-row gap-4 mx-auto my-2">
+    <div className='flex flex-row gap-4 mx-auto my-2'>
+      <Label>Name</Label>
       <Input type='text' {...register(`fields.${index}.name`)} />
+      <Label>Label (short, not duplicated version of the name)</Label>
       <Input type='text' {...register(`fields.${index}.label`)} />
     </div>
   );
@@ -101,7 +112,9 @@ export function ChoiceField({
 }) {
   return (
     <>
+      <Label>Name</Label>
       <Input type='text' {...register(`fields.${index}.name`)} />
+      <Label>Label (short, not duplicated version of the name)</Label>
       <Input type='text' {...register(`fields.${index}.label`)} />
       <button
         type='button'
@@ -111,7 +124,7 @@ export function ChoiceField({
             one_of: [...(get(`fields.${index}.one_of`) as string[]), ""],
           } as any)
         }>
-        add
+        add choice
       </button>
       <button
         type='button'
@@ -121,10 +134,16 @@ export function ChoiceField({
             one_of: [...(get(`fields.${index}.one_of`) as string[])].slice(0, -1),
           } as any)
         }>
-        delete last
+        delete last choice
       </button>
-      {get(`fields.${index}.one_of`).map(({ }, oneOfIndex) => {
-        return <Input key={oneOfIndex} type='text' {...register(`fields.${index}.one_of.${oneOfIndex}`)} />;
+      {get(`fields.${index}.one_of`).map(({}, oneOfIndex) => {
+        return (
+          <div key={oneOfIndex}>
+            {" "}
+            <Label>Choice: </Label>
+            <Input key={oneOfIndex} type='text' {...register(`fields.${index}.one_of.${oneOfIndex}`)} />
+          </div>
+        );
       })}
     </>
   );
@@ -136,8 +155,7 @@ export function Field(props: {
   update: UseFieldArrayUpdate<Form, "fields">;
   get: UseFormGetValues<Form>;
 }) {
-  const choice = !!(props.get(`fields.${props.index}.one_of`) as string[] | null | undefined)
+  const choice = !!(props.get(`fields.${props.index}.one_of`) as string[] | null | undefined);
   if (choice) return <ChoiceField {...props} />;
-  else return <NormalField {...props} />
+  else return <NormalField {...props} />;
 }
-

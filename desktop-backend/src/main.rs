@@ -129,6 +129,7 @@ fn upload_schema(
     selected_comp: tauri::State<'_, SelectedComp>,
 ) -> Result<(), String> {
     let comps = db.collection::<Competition>("competitions");
+    println!("{:?}", schema);
     let mut opened_comp = selected_comp
         .comp
         .lock()
@@ -151,8 +152,6 @@ fn upload_schema(
         .unwrap()
         .replace(opened_comp.clone());
 
-
-
     comps
         .update_one(
             doc! { "name": &opened_comp.name },
@@ -160,23 +159,34 @@ fn upload_schema(
         )
         .map_err(|e| e.to_string())?;
 
+    println!("{:?}", comps.find_many(None).unwrap());
+
     Ok(())
 }
 
 #[tauri::command]
 #[specta]
-fn get_schema(schema_type: SchemaType, selected_comp: tauri::State<'_, SelectedComp>,) -> Option<Vec<Field>> {
+fn get_schema(
+    schema_type: SchemaType,
+    selected_comp: tauri::State<'_, SelectedComp>,
+) -> Option<Vec<Field>> {
     match schema_type {
         SchemaType::PIT => selected_comp.pit_schema.lock().unwrap().clone(),
         SchemaType::MATCH => selected_comp.match_schema.lock().unwrap().clone(),
     }
 }
 
-
 fn main() {
     #[cfg(debug_assertions)]
     tauri_specta::ts::export(
-        collect_types![new_comp, get_comps, pit_scout, match_scout, upload_schema, get_schema],
+        collect_types![
+            new_comp,
+            get_comps,
+            pit_scout,
+            match_scout,
+            upload_schema,
+            get_schema
+        ],
         "../desktop-frontend/src/lib/backend.ts",
     )
     .unwrap();
@@ -187,7 +197,8 @@ fn main() {
             get_comps,
             pit_scout,
             match_scout,
-            upload_schema, get_schema
+            upload_schema,
+            get_schema
         ])
         .manage(Db::new())
         .manage(SelectedComp::default())

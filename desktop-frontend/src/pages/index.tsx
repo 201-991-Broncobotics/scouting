@@ -1,7 +1,16 @@
-export default function App() {
+import { useQuery } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { getSchema, wrapBackend } from "../lib/types";
+
+function App() {
+  const pitSchema = useQuery({
+    queryFn: () => (() => typeof window === "undefined" ? null : getSchema("PIT")),
+    queryKey: ["pit",]
+  })
   return <div className='text-red-500 text-4xl '>
-    <a href="/createSchema">create schema</a>
-    <a href="/pit">pit scout</a>
-    <a href="/match">match scout</a>
+    <p>{JSON.stringify(pitSchema.data)}</p>
+
   </div>;
 }
+

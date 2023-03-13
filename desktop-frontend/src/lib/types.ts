@@ -1,5 +1,10 @@
 import * as types from "./backend";
 
+export function wrapBackend<T extends () => unknown>(fn: T): ReturnType<T> | null {
+  if (typeof window === "undefined") return null
+  else return fn() as ReturnType<T>
+}
+
 export interface CheckboxField {
   name: string,
   label: string,
