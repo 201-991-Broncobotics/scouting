@@ -1,6 +1,10 @@
 {
   "name": "scouting-desktop-backend",
   "scripts": {
-    "check": "cargo check"
+    "check": "cargo check",
+    "tdev": "tauri dev"
+  },
+  "dependencies": {
+    "@tauri-apps/cli": "^1.2.2"
   }
 }

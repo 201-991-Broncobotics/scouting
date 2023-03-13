@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use specta::Type;
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize, Type)]
 pub struct Team {
     pub name: String,
     pub number: u32,
@@ -9,14 +10,14 @@ pub struct Team {
     pub matches: Vec<Match>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Type)]
 pub struct Match {
     pub match_number: u32,
     pub team: TeamType,
     pub additional_data: Value,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Type)]
 pub enum TeamType {
     RED1,
     RED2,
@@ -26,44 +27,46 @@ pub enum TeamType {
     BLUE3,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Type)]
 pub struct Competition {
     pub name: String,
     pub tba_key: String,
-    pub match_fields: Vec<Field>,
-    pub pit_fields: Vec<Field>,
+    pub match_schema: Vec<Field>,
+    pub pit_schema: Vec<Field>,
 }
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, Type)]
+pub enum SchemaType {
+    PIT,
+    MATCH,
+}
+
+#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Type)]
 pub struct Checkbox {
-    pub value: bool,
     pub label: String,
     pub name: String,
 }
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Type)]
 pub struct Number {
-    pub value: rust_decimal::Decimal,
     pub label: String,
     pub name: String,
 }
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Type)]
 pub struct Choice {
-    pub value: String,
     pub label: String,
     pub one_of: Vec<String>,
     pub name: String,
 }
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Default, Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Type)]
 pub struct Text {
-    pub value: String,
     pub label: String,
     pub name: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Type)]
 pub enum Field {
     Checkbox(Checkbox),
     Number(Number),

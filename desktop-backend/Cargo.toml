@@ -18,6 +18,9 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.2", features = ["fs-all", "shell-open"] }
 polodb_core = "3.4.0"
 rust_decimal = "1.28.1"
+tauri-specta = { version = "1.0.0", features = ["typescript"] }
+specta = { version = "1.0.0", features = ["rust_decimal"] }
+bson = "2.5.0"
 
 [features]
 # by default Tauri runs in production mode

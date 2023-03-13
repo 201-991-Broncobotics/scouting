@@ -3,4 +3,4 @@ packages:
   - desktop-frontend
   - desktop-backend
   - ui
-  - algos
+  - types
