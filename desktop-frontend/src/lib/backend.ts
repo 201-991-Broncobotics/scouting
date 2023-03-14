@@ -29,7 +29,19 @@ export function uploadSchema(schema: Field[], schemaType: SchemaType) {
 }
 
 export function getSchema(schemaType: SchemaType) {
-    return invoke<Field[] | null>("get_schema", { schemaType })
+    return invoke<Field[]>("get_schema", { schemaType })
+}
+
+export function getOpenComp() {
+    return invoke<Competition | null>("get_open_comp")
+}
+
+export function openComp(name: string) {
+    return invoke<null>("open_comp", { name })
+}
+
+export function deleteComp(name: string) {
+    return invoke<null>("delete_comp", { name })
 }
 
 export type Number = { label: string; name: string }

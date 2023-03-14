@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSchema, wrapBackend } from "../lib/types";
+import { getSchema, } from "../lib/types";
 
 export default function Home() {
   const pitSchema = useQuery({
@@ -8,7 +8,6 @@ export default function Home() {
   })
   return <div className='text-red-500 text-4xl '>
     <p>{JSON.stringify(pitSchema.data)}</p>
-
-QueryClientProvider   </div>;
+  </div>;
 }
 

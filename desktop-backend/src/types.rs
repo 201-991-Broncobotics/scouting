@@ -27,7 +27,7 @@ pub enum TeamType {
     BLUE3,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, Type)]
+#[derive(Debug, Serialize, Deserialize, Clone, Type, PartialEq, Eq)]
 pub struct Competition {
     pub name: String,
     pub tba_key: String,

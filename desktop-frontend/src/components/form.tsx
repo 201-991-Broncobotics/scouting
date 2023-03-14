@@ -81,9 +81,10 @@ export const Form = ({ onSubmit }: { onSubmit: (form: Form) => void | Promise<vo
 };
 
 export function Input(
-  props: Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "className">
+  // im to lazy to type this the right way... 
+  props: { register: any }
 ) {
-  return <input {...props} className='border border-1 border-black text-black ' />;
+  return <input {...props.register} className='border border-1 border-black text-black ' />;
 }
 export function Label({ children }: { children: string }) {
   return <span className='text-black text-lg'>{children}</span>;
@@ -93,9 +94,9 @@ export function NormalField({ register, index }: { register: UseFormRegister<For
   return (
     <div className='flex flex-row gap-4 mx-auto my-2'>
       <Label>Name</Label>
-      <Input type='text' {...register(`fields.${index}.name`)} />
+      <Input {...{ register: register(`fields.${index}.name`) }} />
       <Label>Label (short, not duplicated version of the name)</Label>
-      <Input type='text' {...register(`fields.${index}.label`)} />
+      <Input {...{ register: register(`fields.${index}.label`) }} />
     </div>
   );
 }
@@ -113,9 +114,9 @@ export function ChoiceField({
   return (
     <>
       <Label>Name</Label>
-      <Input type='text' {...register(`fields.${index}.name`)} />
+      <Input register={register(`fields.${index}.name`)} />
       <Label>Label (short, not duplicated version of the name)</Label>
-      <Input type='text' {...register(`fields.${index}.label`)} />
+      <Input register={register(`fields.${index}.label`)} />
       <button
         type='button'
         onClick={() =>
@@ -136,12 +137,12 @@ export function ChoiceField({
         }>
         delete last choice
       </button>
-      {get(`fields.${index}.one_of`).map(({}, oneOfIndex) => {
+      {get(`fields.${index}.one_of`).map(({ }, oneOfIndex) => {
         return (
           <div key={oneOfIndex}>
             {" "}
             <Label>Choice: </Label>
-            <Input key={oneOfIndex} type='text' {...register(`fields.${index}.one_of.${oneOfIndex}`)} />
+            <Input key={oneOfIndex} register={register(`fields.${index}.one_of.${oneOfIndex}`)} />
           </div>
         );
       })}

@@ -7,16 +7,17 @@ import NewComp from "./routes/newComp";
 import "./styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "./components/Navbar";
+import ChangeComp from "./routes/openComp";
 
 const queryClient = new QueryClient()
 
 // basically a layout (kinda)
 function Root() {
+
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />
       <Outlet />
-      <p> tEst </p>
     </QueryClientProvider >
   );
 }
@@ -42,8 +43,13 @@ const newCompRoute = new Route({
   path: "/newComp",
   component: NewComp,
 });
+const openCompRoute = new Route({
+  getParentRoute: () => rootRoute, 
+  path: "/changeComp", 
+  component: ChangeComp
+})
 
-const routeTree = rootRoute.addChildren([indexRoute, createSchemaRoute, newCompRoute]);
+const routeTree = rootRoute.addChildren([indexRoute, createSchemaRoute, newCompRoute, openCompRoute]);
 const router = new Router({ routeTree });
 // Register your router for maximum type safety
 declare module "@tanstack/router" {
