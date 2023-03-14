@@ -1,7 +1,8 @@
 {
   "name": "scouting",
   "scripts": {
-    "lint": "turbo lint check"
+    "lint": "turbo lint check", 
+    "build": "turbo build"
   },
   "license": "MIT",
   "devDependencies": {
