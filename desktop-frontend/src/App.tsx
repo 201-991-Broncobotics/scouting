@@ -7,7 +7,7 @@ import NewComp from "./routes/newComp";
 import "./styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "./components/Navbar";
-import ChangeComp from "./routes/openComp";
+import CompList from "./routes/openComp";
 
 const queryClient = new QueryClient()
 
@@ -46,7 +46,7 @@ const newCompRoute = new Route({
 const openCompRoute = new Route({
   getParentRoute: () => rootRoute, 
   path: "/changeComp", 
-  component: ChangeComp
+  component: CompList
 })
 
 const routeTree = rootRoute.addChildren([indexRoute, createSchemaRoute, newCompRoute, openCompRoute]);
