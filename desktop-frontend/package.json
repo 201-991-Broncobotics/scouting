@@ -1,33 +1,30 @@
 {
-  "name": "scouting-desktop-frontend",
+  "name": "desktop-frontend-new",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev -p 1420",
-    "build": "next build && next export -o dist && echo \"\" > dist/.gitkeep",
-    "lint": "next lint",
-    "tauri": "tauri"
+    "dev": "vite --port 1420",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@hookform/resolvers": "^2.9.11",
     "@tanstack/react-query": "^4.26.1",
-    "@tauri-apps/api": "^1.2.0",
-    "@ts-react/form": "^1.4.2",
-    "next": "^13.0.0",
+    "@tanstack/react-router": "0.0.1-beta.83",
+    "@tanstack/router": "0.0.1-beta.83",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.5",
-    "ui": "workspace:*",
-    "zod": "^3.20.6"
+    "ui": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^18.7.11",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "autoprefixer": "^10.4.13",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
-    "typescript": "^4.9.0"
-  },
-  "main": "src/index.ts"
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
 }
