@@ -51,8 +51,10 @@ pub fn get_schema(
     let comp = selected_comp.comp.lock().unwrap();
     let comp = comp.clone().ok_or("no competition selected")?;
 
+    println!("getting schema... {:?}", comp.clone());
+
     Ok(match schema_type {
-        SchemaType::PIT => comp.pit_schema,
-        SchemaType::MATCH => comp.match_schema,
+        SchemaType::PIT => comp.clone().pit_schema,
+        SchemaType::MATCH => comp.clone().match_schema,
     })
 }

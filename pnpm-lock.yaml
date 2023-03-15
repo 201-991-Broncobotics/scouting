@@ -25,6 +25,7 @@ importers:
       '@types/react-dom': ^18.0.10
       '@vitejs/plugin-react-swc': ^3.0.0
       autoprefixer: ^10.4.14
+      lzma-web: ^3.0.1
       postcss: ^8.4.21
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -37,6 +38,7 @@ importers:
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-router': 0.0.1-beta.83_biqbaboplfbrettd7655fr4n2y
       '@tanstack/router': 0.0.1-beta.83
+      lzma-web: 3.0.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.43.5_react@18.2.0

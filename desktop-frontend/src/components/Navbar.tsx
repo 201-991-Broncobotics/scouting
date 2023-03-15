@@ -11,10 +11,9 @@ export default function Navbar() {
   return (<>
     <div className='flex flex-row justify-between text-2xl text-blue-800'>
       <Link to='/'>Home</Link>
-      <Link to='/newComp'>new competition</Link>
-      <Link to='/createSchema'>create schema</Link>
-      <Link to="/changeComp">Change current comp </Link>
+      <Link to='/newComp'>competition stuff </Link>
+      <Link to='/createSchema'>edit schema </Link>
     </div>
   </>
- );
+  );
 }

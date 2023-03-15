@@ -22,7 +22,7 @@ export default function CompList() {
     <p>Open comp name : {openCompQuery.data?.name}</p>
 
     {allComps.data.map(comp => {
-      return <div className="flex flex-row gap-3">
+      return <div key={comp.name} className="flex flex-row gap-3">
         <p>name: {comp.name}</p>
         <Button variant="secondary" onClick={() => openComp(comp.name)} > Open {comp.name} </Button>
         <Button variant="danger" onClick={() => deleteComp(comp.name)}> Delete {comp.name} </Button>

@@ -62,8 +62,10 @@ pub fn delete_comp(
         .map_err(|e| e.to_string())?;
 
     {
-        *state.comp.lock().unwrap() = None; 
+        *state.comp.lock().unwrap() = None;
     }
+
+    println!("{:?}", state.comp.lock().unwrap());
 
     Ok(())
 }
