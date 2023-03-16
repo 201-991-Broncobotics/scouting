@@ -1,7 +1,7 @@
 {
   "build": {
     "beforeDevCommand": "cd ../desktop-frontend && pnpm dev",
-    "beforeBuildCommand": "cd ../desktop-frontend && pnpm turbo build --filter desktop-frontend",
+    "beforeBuildCommand": "cd ../desktop-frontend && pnpm build",
     "devPath": "http://localhost:1420",
     "distDir": "../desktop-frontend/dist",
     "withGlobalTauri": false
